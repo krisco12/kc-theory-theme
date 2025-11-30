@@ -1,0 +1,38 @@
+{% stylesheet %}{{ 'kc-hero-section.css' | asset_url | stylesheet_tag }}{% endstylesheet %}
+<div class="kc-hero-section">
+  <div class="kc-hero-content">
+    <div class="kc-hero-text">
+      <div class="kc-hero-logo">
+        <img src="{{ 'kc-theory-logo.png' | asset_url }}" alt="KC Theory Logo" class="kc-hero-logo-img" />
+      </div>
+      <h1 class="kc-hero-title">{{ section.settings.hero_title | default: "Transform Your ADHD Journey" }}</h1>
+      <div class="kc-hero-subtitle">{{ section.settings.hero_subtitle | default: "Evidence-based tools and coaching for men navigating ADHD and mental health challenges." }}</div>
+      <div class="kc-hero-buttons">
+        <a href="{{ section.settings.primary_button_link | default: '/collections/all' }}" class="kc-primary-btn">{{ section.settings.primary_button_text | default: "Shop Tools" }}</a>
+        <a href="{{ section.settings.secondary_button_link | default: '/pages/coaching' }}" class="kc-secondary-btn">{{ section.settings.secondary_button_text | default: "Coaching Resources" }}</a>
+      </div>
+    </div>
+    <div class="kc-hero-image">
+      {% if section.settings.hero_image %}
+        <img src="{{ section.settings.hero_image | image_url }}" alt="KC Hero" />
+      {% else %}
+        <div class="kc-hero-placeholder">Upload a hero image in section settings.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "KC Hero Section",
+  "settings": [
+    { "type": "text", "id": "hero_title", "label": "Hero Title", "default": "Transform Your ADHD Journey" },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Hero Subtitle", "default": "Evidence-based tools and coaching for men navigating ADHD and mental health challenges." },
+    { "type": "text", "id": "primary_button_text", "label": "Primary Button Text", "default": "Shop Tools" },
+    { "type": "url", "id": "primary_button_link", "label": "Primary Button Link" },
+    { "type": "text", "id": "secondary_button_text", "label": "Secondary Button Text", "default": "Coaching Resources" },
+    { "type": "url", "id": "secondary_button_link", "label": "Secondary Button Link" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Image" }
+  ],
+  "presets": [{ "name": "KC Hero Section" }]
+}
+{% endschema %}
