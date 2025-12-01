@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "quiz_section": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<link rel=\"stylesheet\" href=\"{{ 'adhd-quiz.css' | asset_url }}\">\n<div id=\"adhd-quiz-container\"></div>\n<script src=\"{{ 'adhd-quiz-data.js' | asset_url }}\"></script>\n<script src=\"{{ 'adhd-quiz.js' | asset_url }}\"></script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "quiz_section"
+  ]
+}
