@@ -28,7 +28,7 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/image.png",
+        "image": "shopify://shop_images/kc_hero_theory_final.png",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
