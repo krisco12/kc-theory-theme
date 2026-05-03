@@ -4,28 +4,40 @@
       "type": "kc-hero-cinematic",
       "settings": {
         "eyebrow": "The 3 C's: Commitment · Consistency · Compassion",
+        "headline_line1": "Stop Surviving.",
+        "headline_line2": "Start Climbing.",
         "subheadline": "Practical, no-bullshit strategies for navigating ADHD, trauma, and the chaos of your own mind. Built on lived experience, grounded in the 3 C's: Commitment, Consistency, and Compassion.",
-        "primary_cta_text": "Get the Free Guide",
-        "secondary_cta_text": "Explore the 10 Core Areas",
-        "show_trust_bar": true,
-        "show_scroll_indicator": true
+        "cta_primary_label": "Get the Free Guide",
+        "cta_primary_url": "#contact",
+        "cta_secondary_label": "Explore the 10 Core Areas",
+        "cta_secondary_url": "#offerings"
       }
     },
     "kc_about": {
       "type": "kc-about",
       "settings": {
         "eyebrow": "About",
-        "headline": "G'day, I'm Just Some Bloke Who Figured Some Shit Out.",
-        "body_text": "<p>Look, I'm not going to start this off with a bunch of fancy credentials or tell you I'm some sort of guru who's got it all figured out. Truth is, I'm just an average bloke who's seen some shit, done some shit, and somehow managed to get over some shit.</p><p>I've been through the wringer with ADHD, PTSD, depression, and anxiety. I know what it's like to wake up and feel like your brain is trying to sabotage you. I spent years trying everything — therapy, medication, self-help books that made me want to punch something — and most of it felt like pissing in the wind.</p><p>But slowly, I started to figure out what actually worked. Not just what the clinical textbooks said should work, but what made a difference in the trenches of day-to-day life.</p><p>That's what The KC Theory is. It's not academic nonsense. It's a practical toolkit built on three simple things: Commitment to doing the work, Consistency in your efforts, and Compassion for yourself when you inevitably stuff up.</p>",
-        "quote": "I'm not a doctor, and this isn't a magic bullet. But if you're tired of feeling stuck and ready to build something better, you're in the right place.",
-        "cta_label": "Read My Full Story"
+        "headline": "G'day, I'm Just Some Bloke",
+        "headline_gold": "Who Figured Some Shit Out.",
+        "paragraph_1": "Look, I'm not going to start this off with a bunch of fancy credentials or tell you I'm some sort of guru who's got it all figured out. Truth is, I'm just an average bloke who's seen some shit, done some shit, and somehow managed to get over some shit.",
+        "paragraph_2": "I've been through the wringer with ADHD, PTSD, depression, and anxiety. I know what it's like to wake up and feel like your brain is trying to sabotage you. I spent years trying everything — therapy, medication, self-help books that made me want to punch something — and most of it felt like pissing in the wind.",
+        "paragraph_3": "But slowly, I started to figure out what actually worked. Not just what the clinical textbooks said should work, but what made a difference in the trenches of day-to-day life.",
+        "paragraph_4": "That's what The KC Theory is. It's not academic nonsense. It's a practical toolkit built on three simple things: Commitment to doing the work, Consistency in your efforts, and Compassion for yourself when you inevitably stuff up.",
+        "blockquote": "I'm not a doctor, and this isn't a magic bullet. But if you're tired of feeling stuck and ready to build something better, you're in the right place.",
+        "cta_label": "Read My Full Story",
+        "cta_url": "#offerings"
       }
     },
     "kc_three_cs": {
       "type": "kc-three-cs",
+      "settings": {
+        "eyebrow": "The Foundation",
+        "headline": "Everything Is Built on",
+        "headline_gold": "Three Things."
+      },
       "blocks": {
         "commitment": {
-          "type": "c_item",
+          "type": "pillar_card",
           "settings": {
             "letter": "C",
             "word": "Commitment",
@@ -33,7 +45,7 @@
           }
         },
         "consistency": {
-          "type": "c_item",
+          "type": "pillar_card",
           "settings": {
             "letter": "C",
             "word": "Consistency",
@@ -41,7 +53,7 @@
           }
         },
         "compassion": {
-          "type": "c_item",
+          "type": "pillar_card",
           "settings": {
             "letter": "C",
             "word": "Compassion",
@@ -49,121 +61,51 @@
           }
         }
       },
-      "block_order": ["commitment", "consistency", "compassion"],
-      "settings": {
-        "eyebrow": "The Foundation",
-        "headline": "Everything Is Built on Three Things."
-      }
+      "block_order": ["commitment", "consistency", "compassion"]
     },
     "kc_offerings": {
       "type": "kc-offerings",
-      "blocks": {
-        "adhd": {
-          "type": "pillar",
-          "settings": {
-            "title": "ADHD Management",
-            "description": "Practical systems for managing attention, hyperfocus, and the chaos of an ADHD brain — without the shame spiral.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2'/></svg>"
-          }
-        },
-        "emotional": {
-          "type": "pillar",
-          "settings": {
-            "title": "Emotional Regulation",
-            "description": "Learning to feel your feelings without being hijacked by them. Tools for when your nervous system goes haywire.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>"
-          }
-        },
-        "trauma": {
-          "type": "pillar",
-          "settings": {
-            "title": "Trauma & PTSD",
-            "description": "Understanding how trauma rewires your brain and the practical steps to start healing — without reliving it over and over.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>"
-          }
-        },
-        "relationships": {
-          "type": "pillar",
-          "settings": {
-            "title": "Relationships",
-            "description": "How ADHD and trauma affect the people around you, and how to build connections that don't fall apart under pressure.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M23 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/></svg>"
-          }
-        },
-        "identity": {
-          "type": "pillar",
-          "settings": {
-            "title": "Identity & Self-Worth",
-            "description": "Rebuilding who you are after years of being told you're broken, lazy, or not enough. Spoiler: you're not.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='8' r='6'/><path d='M15.477 12.89L17 22l-5-3-5 3 1.523-9.11'/></svg>"
-          }
-        },
-        "productivity": {
-          "type": "pillar",
-          "settings": {
-            "title": "Productivity & Focus",
-            "description": "Systems that actually work for the ADHD brain. Not productivity hacks from neurotypical gurus — real tools for real brains.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polyline points='22 12 18 12 15 21 9 3 6 12 2 12'/></svg>"
-          }
-        },
-        "sleep": {
-          "type": "pillar",
-          "settings": {
-            "title": "Sleep & Recovery",
-            "description": "Why your brain fights sleep and what to do about it. Recovery isn't optional — it's the foundation everything else is built on.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>"
-          }
-        },
-        "physical": {
-          "type": "pillar",
-          "settings": {
-            "title": "Physical Health",
-            "description": "The connection between your body and your brain is real. Simple, sustainable movement and nutrition that supports mental health.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M18 8h1a4 4 0 0 1 0 8h-1'/><path d='M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z'/><line x1='6' y1='1' x2='6' y2='4'/><line x1='10' y1='1' x2='10' y2='4'/><line x1='14' y1='1' x2='14' y2='4'/></svg>"
-          }
-        },
-        "financial": {
-          "type": "pillar",
-          "settings": {
-            "title": "Financial Clarity",
-            "description": "ADHD and money is a disaster waiting to happen. Practical frameworks for getting your finances under control without the shame.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/></svg>"
-          }
-        },
-        "purpose": {
-          "type": "pillar",
-          "settings": {
-            "title": "Purpose & Direction",
-            "description": "Finding what actually matters to you — not what you think should matter — and building a life that's worth showing up for.",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polygon points='3 11 22 2 13 21 11 13 3 11'/></svg>"
-          }
-        }
-      },
-      "block_order": ["adhd","emotional","trauma","relationships","identity","productivity","sleep","physical","financial","purpose"],
       "settings": {
-        "eyebrow": "The Toolkit",
-        "headline": "The 10 Core Areas",
-        "intro": "These aren't just topics. They're the pillars I've personally had to rebuild. Each one is a core area where ADHD, trauma, and mental health intersect with daily life — and where real, practical change is possible."
-      }
+        "eyebrow": "The Framework",
+        "headline": "The Toolkit:",
+        "headline_gold": "10 Core Areas",
+        "headline_suffix": "to Get Your Head Right",
+        "intro": "Mental health isn't simple, but it doesn't have to be complicated. Pick the one that feels most urgent, give it a proper go, and build from there.",
+        "cta_label": "Dive Into the E-Books",
+        "cta_url": "#contact"
+      },
+      "blocks": {
+        "p01": { "type": "pillar", "settings": { "number": "01", "title": "Getting Your Nervous System Right",    "description": "Calm the fight-or-flight response that never quite switches off." } },
+        "p02": { "type": "pillar", "settings": { "number": "02", "title": "Fixing Your Thinking",                "description": "Break out of negative thought loops and cognitive distortions." } },
+        "p03": { "type": "pillar", "settings": { "number": "03", "title": "Being Present",                       "description": "Stop living in the past or stressing about the future." } },
+        "p04": { "type": "pillar", "settings": { "number": "04", "title": "Listening to Your Body",              "description": "Understand the physical signals your brain is ignoring." } },
+        "p05": { "type": "pillar", "settings": { "number": "05", "title": "Working With ADHD",                   "description": "Strategies for focus, executive function, and emotional regulation." } },
+        "p06": { "type": "pillar", "settings": { "number": "06", "title": "Building on Your Strengths",          "description": "Stop focusing only on what's broken and leverage what works." } },
+        "p07": { "type": "pillar", "settings": { "number": "07", "title": "Getting Your Internal Voices Sorted", "description": "Tame the inner critic that tells you you're weak or broken." } },
+        "p08": { "type": "pillar", "settings": { "number": "08", "title": "Training Your Brain",                 "description": "Practical exercises to build resilience and mental flexibility." } },
+        "p09": { "type": "pillar", "settings": { "number": "09", "title": "Fixing Your Relationships",           "description": "Rebuild trust, connection, and healthy boundaries." } },
+        "p10": { "type": "pillar", "settings": { "number": "10", "title": "Putting It All Together",             "description": "Integrate the strategies into a life that actually works for you." } }
+      },
+      "block_order": ["p01","p02","p03","p04","p05","p06","p07","p08","p09","p10"]
     },
     "kc_contact": {
       "type": "kc-contact",
       "settings": {
         "eyebrow": "Get in Touch",
-        "headline": "Ready to Start Climbing?",
-        "body": "Whether you've got a question, want to work together, or just want to say g'day — I'm here. No corporate bullshit, no automated responses. Just a real conversation.",
-        "email": "hello@thekctheory.com.au",
-        "instagram": "thekctheory",
+        "headline": "Ready to",
+        "headline_gold": "Do the Work?",
+        "intro": "If you've got questions, need some direction on where to start, or just want to say g'day, drop a line below.",
+        "note": "Note: I provide online coaching and guidance only. No automated booking systems here — just real conversations to see if we're a good fit.",
+        "name_placeholder": "Your name",
+        "email_placeholder": "your@email.com",
+        "message_label": "What's the biggest challenge you're facing right now?",
+        "message_placeholder": "Tell me what's going on...",
         "submit_label": "Send Message",
-        "show_disclaimer": true
+        "crisis_note": "If you're in crisis, please reach out to a professional or call a helpline.",
+        "crisis_number": "Lifeline: 13 11 14",
+        "crisis_suffix": ". The KC Theory is for building a better life, not for when you're hanging on by a thread."
       }
     }
   },
-  "order": [
-    "kc_hero",
-    "kc_about",
-    "kc_three_cs",
-    "kc_offerings",
-    "kc_contact"
-  ]
+  "order": ["kc_hero", "kc_about", "kc_three_cs", "kc_offerings", "kc_contact"]
 }
