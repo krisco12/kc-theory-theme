@@ -1,0 +1,434 @@
+/*
+ * ============================================================
+ *  THE KC THEORY — Master Brand CSS
+ *  Version: 2.0 (2026 Redesign)
+ *  Description: Global brand overrides for the Dawn base theme.
+ *               Dark mode by default. Cinematic. Masculine. Premium.
+ *  Load order: After all Dawn base CSS, before section-specific CSS.
+ * ============================================================
+ */
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================ */
+:root {
+  /* Core Palette */
+  --kc-navy:          #002040;
+  --kc-navy-deep:     #001020;
+  --kc-navy-mid:      #003060;
+  --kc-gold:          #C0A060;
+  --kc-gold-bright:   #E0C080;
+  --kc-gold-dark:     #906030;
+  --kc-slate:         #505060;
+  --kc-slate-light:   #707080;
+  --kc-mist:          #D0D0B0;
+  --kc-white:         #F4F4F0;
+  --kc-off-white:     #E8E8E0;
+
+  /* Semantic Colours */
+  --kc-bg:            var(--kc-navy-deep);
+  --kc-bg-card:       var(--kc-navy);
+  --kc-bg-elevated:   var(--kc-navy-mid);
+  --kc-text-primary:  var(--kc-white);
+  --kc-text-secondary: var(--kc-mist);
+  --kc-text-muted:    var(--kc-slate-light);
+  --kc-accent:        var(--kc-gold);
+  --kc-accent-hover:  var(--kc-gold-bright);
+  --kc-border:        rgba(192, 160, 96, 0.2);
+  --kc-border-strong: rgba(192, 160, 96, 0.5);
+
+  /* Typography */
+  --kc-font-heading:  'Montserrat', 'Arial Black', Arial, sans-serif;
+  --kc-font-body:     'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --kc-font-mono:     'JetBrains Mono', 'Courier New', monospace;
+
+  /* Spacing */
+  --kc-section-pad:   clamp(3rem, 8vw, 7rem);
+  --kc-container:     1280px;
+  --kc-radius:        8px;
+  --kc-radius-lg:     16px;
+
+  /* Shadows & Glows */
+  --kc-shadow:        0 4px 24px rgba(0, 0, 0, 0.5);
+  --kc-shadow-gold:   0 0 24px rgba(192, 160, 96, 0.25);
+  --kc-glow-gold:     0 0 40px rgba(224, 192, 128, 0.3);
+
+  /* Transitions */
+  --kc-transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --kc-transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   2. GLOBAL RESETS & BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--kc-bg) !important;
+  color: var(--kc-text-primary) !important;
+  font-family: var(--kc-font-body) !important;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4 {
+  font-family: var(--kc-font-heading) !important;
+  color: var(--kc-text-primary) !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Links */
+a {
+  color: var(--kc-gold);
+  transition: var(--kc-transition);
+}
+a:hover {
+  color: var(--kc-gold-bright);
+}
+
+/* Horizontal rules */
+hr {
+  border-color: var(--kc-border);
+}
+
+/* ============================================================
+   3. SHOPIFY DAWN OVERRIDES (Dark Mode)
+   ============================================================ */
+
+/* Page background */
+.shopify-section,
+.page-width,
+main,
+.main-page-content {
+  background-color: var(--kc-bg) !important;
+  color: var(--kc-text-primary) !important;
+}
+
+/* Header */
+.header-wrapper,
+.header {
+  background-color: rgba(0, 16, 32, 0.95) !important;
+  border-bottom: 1px solid var(--kc-border) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.header__heading-link,
+.header__menu-item,
+.header__icon {
+  color: var(--kc-white) !important;
+}
+
+.header__heading-link:hover,
+.header__menu-item:hover {
+  color: var(--kc-gold) !important;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--kc-navy-deep) !important;
+  border-top: 1px solid var(--kc-border) !important;
+  color: var(--kc-text-secondary) !important;
+}
+
+.footer__heading {
+  color: var(--kc-gold) !important;
+  font-family: var(--kc-font-heading) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+}
+
+/* Cards */
+.card,
+.card-wrapper,
+.product-card-wrapper {
+  background-color: var(--kc-bg-card) !important;
+  border: 1px solid var(--kc-border) !important;
+  border-radius: var(--kc-radius-lg) !important;
+  transition: var(--kc-transition);
+}
+
+.card:hover,
+.card-wrapper:hover,
+.product-card-wrapper:hover {
+  border-color: var(--kc-border-strong) !important;
+  box-shadow: var(--kc-shadow-gold) !important;
+  transform: translateY(-2px);
+}
+
+.card__heading,
+.card__heading a {
+  color: var(--kc-text-primary) !important;
+  font-family: var(--kc-font-heading) !important;
+}
+
+/* Buttons — Primary */
+.button,
+.btn,
+button[type="submit"],
+.shopify-payment-button__button--unbranded {
+  background-color: var(--kc-gold) !important;
+  color: var(--kc-navy-deep) !important;
+  border: none !important;
+  border-radius: var(--kc-radius) !important;
+  font-family: var(--kc-font-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  padding: 0.85em 2em !important;
+  transition: var(--kc-transition) !important;
+  cursor: pointer;
+}
+
+.button:hover,
+.btn:hover,
+button[type="submit"]:hover {
+  background-color: var(--kc-gold-bright) !important;
+  box-shadow: var(--kc-glow-gold) !important;
+  transform: translateY(-1px);
+}
+
+/* Buttons — Secondary / Outline */
+.button--secondary,
+.btn--secondary {
+  background-color: transparent !important;
+  color: var(--kc-gold) !important;
+  border: 2px solid var(--kc-gold) !important;
+}
+
+.button--secondary:hover,
+.btn--secondary:hover {
+  background-color: var(--kc-gold) !important;
+  color: var(--kc-navy-deep) !important;
+}
+
+/* Forms & Inputs */
+input,
+textarea,
+select {
+  background-color: var(--kc-bg-elevated) !important;
+  color: var(--kc-text-primary) !important;
+  border: 1px solid var(--kc-border) !important;
+  border-radius: var(--kc-radius) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--kc-gold) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(192, 160, 96, 0.2) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--kc-text-muted) !important;
+}
+
+/* Price */
+.price,
+.price__regular,
+.price__sale {
+  color: var(--kc-gold) !important;
+  font-family: var(--kc-font-heading) !important;
+  font-weight: 700;
+}
+
+/* Badges */
+.badge {
+  background-color: var(--kc-gold) !important;
+  color: var(--kc-navy-deep) !important;
+  font-family: var(--kc-font-heading) !important;
+  font-weight: 700;
+}
+
+/* ============================================================
+   4. UTILITY CLASSES
+   ============================================================ */
+
+/* Container */
+.kc-container {
+  max-width: var(--kc-container);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+}
+
+/* Section padding */
+.kc-section {
+  padding: var(--kc-section-pad) 0;
+}
+
+/* Gold accent line */
+.kc-accent-line {
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--kc-gold), var(--kc-gold-bright));
+  border-radius: 2px;
+  margin: 1rem 0;
+}
+
+.kc-accent-line--center {
+  margin: 1rem auto;
+}
+
+/* Eyebrow label */
+.kc-eyebrow {
+  font-family: var(--kc-font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kc-gold);
+}
+
+/* Gold gradient text */
+.kc-gold-text {
+  background: linear-gradient(135deg, var(--kc-gold), var(--kc-gold-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Cinematic divider */
+.kc-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--kc-gold), transparent);
+  margin: 3rem 0;
+  opacity: 0.4;
+}
+
+/* Card glass effect */
+.kc-card-glass {
+  background: rgba(0, 32, 64, 0.6) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--kc-border) !important;
+  border-radius: var(--kc-radius-lg);
+}
+
+/* ============================================================
+   5. TYPOGRAPHY SCALE
+   ============================================================ */
+
+.kc-display {
+  font-family: var(--kc-font-heading);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.kc-h1 {
+  font-family: var(--kc-font-heading);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.kc-h2 {
+  font-family: var(--kc-font-heading);
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.kc-h3 {
+  font-family: var(--kc-font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kc-body-lg {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.7;
+  color: var(--kc-text-secondary);
+}
+
+.kc-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--kc-text-secondary);
+}
+
+/* ============================================================
+   6. ANIMATIONS
+   ============================================================ */
+
+@keyframes kc-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes kc-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(192, 160, 96, 0.2); }
+  50%       { box-shadow: 0 0 40px rgba(192, 160, 96, 0.5); }
+}
+
+@keyframes kc-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.kc-animate-fade-up {
+  animation: kc-fade-up 0.7s ease forwards;
+}
+
+.kc-animate-fade-up--delay-1 { animation-delay: 0.15s; opacity: 0; }
+.kc-animate-fade-up--delay-2 { animation-delay: 0.3s;  opacity: 0; }
+.kc-animate-fade-up--delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+.kc-glow-pulse {
+  animation: kc-glow-pulse 3s ease-in-out infinite;
+}
+
+/* ============================================================
+   7. SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--kc-navy-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--kc-gold-dark);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--kc-gold);
+}
+
+/* ============================================================
+   8. RESPONSIVE UTILITIES
+   ============================================================ */
+@media (max-width: 768px) {
+  .kc-hide-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .kc-hide-desktop { display: none !important; }
+}

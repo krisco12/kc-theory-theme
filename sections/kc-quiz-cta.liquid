@@ -1,0 +1,203 @@
+{% comment %}
+  ============================================================
+  KC THEORY — Quiz CTA Section
+  Description: High-conversion section driving users to the
+               "What's Your Focus Type?" quiz funnel.
+               This is the #1 lead generation asset on the site.
+  ============================================================
+{% endcomment %}
+
+{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="kc-quiz-cta kc-section" id="kc-quiz-cta">
+  <div class="kc-container">
+    <div class="kc-quiz-cta__card kc-card-glass">
+
+      <div class="kc-quiz-cta__badge">
+        <span class="kc-eyebrow">Free Assessment</span>
+      </div>
+
+      <h2 class="kc-quiz-cta__headline kc-h2">
+        {{ section.settings.headline | default: "What's Your Focus Type?" }}
+      </h2>
+
+      <p class="kc-quiz-cta__body kc-body-lg">
+        {{ section.settings.body | default: "Most ADHD advice is built for someone else's brain. Take our 3-minute assessment and get a personalised toolkit matched to how you actually think." }}
+      </p>
+
+      <div class="kc-quiz-cta__features">
+        {%- for i in (1..3) -%}
+          {%- assign feature_key = 'feature_' | append: i -%}
+          {%- if section.settings[feature_key] != blank -%}
+            <div class="kc-quiz-cta__feature">
+              <span class="kc-quiz-cta__feature-icon" aria-hidden="true">✦</span>
+              <span>{{ section.settings[feature_key] }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <a
+        href="{{ section.settings.quiz_url | default: '/pages/quiz' }}"
+        class="kc-btn kc-btn--primary kc-quiz-cta__btn kc-glow-pulse"
+      >
+        {{ section.settings.cta_text | default: "Start Your Focus Assessment →" }}
+      </a>
+
+      <p class="kc-quiz-cta__disclaimer">
+        {{ section.settings.disclaimer | default: "Takes 3 minutes. No email required to start." }}
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .kc-quiz-cta {
+    background-color: var(--kc-bg);
+  }
+
+  .kc-quiz-cta__card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem);
+    text-align: center;
+    border-radius: var(--kc-radius-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle gold glow behind the card */
+  .kc-quiz-cta__card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--kc-gold), transparent 60%);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .kc-quiz-cta__card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .kc-quiz-cta__badge {
+    margin-bottom: 1rem;
+  }
+
+  .kc-quiz-cta__headline {
+    color: var(--kc-white);
+    margin-bottom: 1.25rem;
+  }
+
+  .kc-quiz-cta__body {
+    max-width: 560px;
+    margin: 0 auto 2rem;
+  }
+
+  .kc-quiz-cta__features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .kc-quiz-cta__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--kc-mist);
+    font-weight: 500;
+  }
+
+  .kc-quiz-cta__feature-icon {
+    color: var(--kc-gold);
+    font-size: 0.7rem;
+  }
+
+  .kc-quiz-cta__btn {
+    font-size: 1rem;
+    padding: 1em 2.5em;
+    margin-bottom: 1.25rem;
+  }
+
+  .kc-quiz-cta__disclaimer {
+    font-size: 0.8rem;
+    color: var(--kc-text-muted);
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "KC Quiz CTA",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "What's Your Focus Type?"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body Text",
+      "default": "Most ADHD advice is built for someone else's brain. Take our 3-minute assessment and get a personalised toolkit matched to how you actually think."
+    },
+    {
+      "type": "text",
+      "id": "feature_1",
+      "label": "Feature 1",
+      "default": "3 minutes to complete"
+    },
+    {
+      "type": "text",
+      "id": "feature_2",
+      "label": "Feature 2",
+      "default": "Personalised product recommendations"
+    },
+    {
+      "type": "text",
+      "id": "feature_3",
+      "label": "Feature 3",
+      "default": "No clinical jargon"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Start Your Focus Assessment →"
+    },
+    {
+      "type": "url",
+      "id": "quiz_url",
+      "label": "Quiz Page URL"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer Text",
+      "default": "Takes 3 minutes. No email required to start."
+    }
+  ],
+  "presets": [
+    {
+      "name": "KC Quiz CTA",
+      "settings": {
+        "headline": "What's Your Focus Type?",
+        "feature_1": "3 minutes to complete",
+        "feature_2": "Personalised product recommendations",
+        "feature_3": "No clinical jargon",
+        "cta_text": "Start Your Focus Assessment →",
+        "disclaimer": "Takes 3 minutes. No email required to start."
+      }
+    }
+  ]
+}
+{% endschema %}

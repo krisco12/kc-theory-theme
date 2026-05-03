@@ -1,0 +1,55 @@
+{% comment %}
+  ============================================================
+  KC THEORY — Legal Disclaimer Snippet
+  Usage: {% render 'kc-disclaimer' %}
+         {% render 'kc-disclaimer', type: 'coaching' %}
+         {% render 'kc-disclaimer', type: 'product' %}
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign disclaimer_type = type | default: 'general'
+-%}
+
+<div class="kc-disclaimer kc-disclaimer--{{ disclaimer_type }}" role="note" aria-label="Important disclaimer">
+  <svg class="kc-disclaimer__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/>
+    <line x1="12" y1="8" x2="12" y2="12"/>
+    <line x1="12" y1="16" x2="12.01" y2="16"/>
+  </svg>
+  <p class="kc-disclaimer__text">
+    {%- if disclaimer_type == 'coaching' -%}
+      The KC Theory offers peer support and lived-experience coaching, not psychological treatment or medical advice. If you need clinical support, please consult a registered mental health professional. Coaching services are non-clinical and non-diagnostic.
+    {%- elsif disclaimer_type == 'product' -%}
+      All products are tools and aids only. They are not intended to diagnose, treat, cure, or prevent any medical condition. Always consult a qualified healthcare professional for medical advice. Australian Consumer Law guarantees apply.
+    {%- else -%}
+      The KC Theory provides general information and peer support tools only — not medical or psychological advice. Content is based on lived experience and is not a substitute for professional clinical care.
+    {%- endif -%}
+  </p>
+</div>
+
+<style>
+  .kc-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.85rem 1.1rem;
+    background: rgba(0, 32, 64, 0.5);
+    border: 1px solid rgba(192, 160, 96, 0.15);
+    border-radius: 6px;
+    margin: 1.5rem 0;
+  }
+
+  .kc-disclaimer__icon {
+    color: var(--kc-gold, #C0A060);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .kc-disclaimer__text {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--kc-text-muted, #707080);
+    margin: 0;
+  }
+</style>

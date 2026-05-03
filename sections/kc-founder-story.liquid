@@ -1,0 +1,227 @@
+{% comment %}
+  ============================================================
+  KC THEORY — Founder Story Section
+  Description: Authentic founder narrative section. This is the
+               single most important trust signal on the site.
+               Lived experience with ADHD, PTSD, late diagnosis.
+  ============================================================
+{% endcomment %}
+
+{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="kc-founder kc-section" id="kc-founder">
+  <div class="kc-container">
+    <div class="kc-founder__grid">
+
+      {%- comment -%} Image column {%- endcomment -%}
+      <div class="kc-founder__image-col">
+        <div class="kc-founder__image-wrap">
+          {%- if section.settings.founder_image != blank -%}
+            <img
+              src="{{ section.settings.founder_image | image_url: width: 800 }}"
+              alt="{{ section.settings.founder_image.alt | default: 'KC Theory Founder' | escape }}"
+              class="kc-founder__image"
+              loading="lazy"
+              width="400"
+              height="500"
+            >
+          {%- else -%}
+            <div class="kc-founder__image-placeholder">
+              <span>Add founder photo in section settings</span>
+            </div>
+          {%- endif -%}
+          <div class="kc-founder__image-frame" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      {%- comment -%} Text column {%- endcomment -%}
+      <div class="kc-founder__text-col">
+        <p class="kc-eyebrow">{{ section.settings.eyebrow | default: "The Story Behind The Brand" }}</p>
+        <span class="kc-accent-line"></span>
+
+        <h2 class="kc-h2 kc-founder__headline">
+          {{ section.settings.headline | default: "I spent 30 years being told I was the problem." }}
+        </h2>
+
+        <div class="kc-founder__body kc-body-lg">
+          {{ section.settings.body | default: "<p>Late-diagnosed ADHD. PTSD. Years of masking, overcompensating, and wondering why everything felt three times harder than it should. The system didn't have answers for me — so I built my own.</p><p>The KC Theory isn't a therapy service. It's the operating manual I wish I'd had at 25. Built from lived experience, not a textbook.</p>" }}
+        </div>
+
+        {%- if section.settings.quote != blank -%}
+          <blockquote class="kc-founder__quote">
+            <p>"{{ section.settings.quote }}"</p>
+          </blockquote>
+        {%- endif -%}
+
+        {%- if section.settings.cta_text != blank -%}
+          <a
+            href="{{ section.settings.cta_url | default: '/pages/about' }}"
+            class="kc-btn kc-btn--secondary"
+          >
+            {{ section.settings.cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .kc-founder {
+    background-color: var(--kc-bg);
+  }
+
+  .kc-founder__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  /* Image */
+  .kc-founder__image-wrap {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .kc-founder__image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--kc-radius-lg);
+    display: block;
+    filter: brightness(0.9) contrast(1.05);
+    position: relative;
+    z-index: 1;
+  }
+
+  .kc-founder__image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--kc-bg-card);
+    border: 2px dashed var(--kc-border);
+    border-radius: var(--kc-radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--kc-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* Gold frame offset */
+  .kc-founder__image-frame {
+    position: absolute;
+    inset: 12px -12px -12px 12px;
+    border: 2px solid var(--kc-gold);
+    border-radius: var(--kc-radius-lg);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Text */
+  .kc-founder__headline {
+    margin: 1rem 0 1.5rem;
+    color: var(--kc-white);
+  }
+
+  .kc-founder__body {
+    margin-bottom: 2rem;
+  }
+
+  .kc-founder__body p {
+    margin-bottom: 1rem;
+    color: var(--kc-text-secondary);
+  }
+
+  /* Quote */
+  .kc-founder__quote {
+    border-left: 3px solid var(--kc-gold);
+    padding-left: 1.5rem;
+    margin: 0 0 2rem;
+  }
+
+  .kc-founder__quote p {
+    font-family: var(--kc-font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--kc-gold);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .kc-founder__grid {
+      grid-template-columns: 1fr;
+    }
+    .kc-founder__image-col {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "KC Founder Story",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder Photo"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "The Story Behind The Brand"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "I spent 30 years being told I was the problem."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body Text",
+      "default": "<p>Late-diagnosed ADHD. PTSD. Years of masking, overcompensating, and wondering why everything felt three times harder than it should. The system didn't have answers for me — so I built my own.</p><p>The KC Theory isn't a therapy service. It's the operating manual I wish I'd had at 25. Built from lived experience, not a textbook.</p>"
+    },
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Pull Quote",
+      "default": "Struggle doesn't define you. Growth does."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Button Text",
+      "default": "Read the full story →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "KC Founder Story",
+      "settings": {
+        "eyebrow": "The Story Behind The Brand",
+        "headline": "I spent 30 years being told I was the problem.",
+        "quote": "Struggle doesn't define you. Growth does.",
+        "cta_text": "Read the full story →"
+      }
+    }
+  ]
+}
+{% endschema %}
