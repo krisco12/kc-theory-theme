@@ -1,0 +1,65 @@
+{% comment %}
+  ============================================================
+  KC Theory — Sticky Navigation Snippet
+  ============================================================
+  File        : snippets/kc-nav.liquid
+  Description : Fixed top navigation with scroll-reactive
+                background, desktop links, mobile hamburger
+                menu, and gold CTA button.
+  Usage       : {% render 'kc-nav' %}
+                Place inside <body> in theme.liquid, before
+                the main content sections.
+  ============================================================
+{% endcomment %}
+
+<nav class="kc-nav" role="navigation" aria-label="Main navigation">
+  <div class="kc-container">
+    <div class="kc-nav__inner">
+
+      {%- comment -%} ── Logo / Wordmark ── {%- endcomment -%}
+      <a href="{{ routes.root_url }}" class="kc-nav__logo" aria-label="The KC Theory — Home">
+        THE <span class="kc-gold-text">KC</span> THEORY
+      </a>
+
+      {%- comment -%} ── Desktop Links ── {%- endcomment -%}
+      <ul class="kc-nav__links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#offerings">The Toolkit</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <a href="#contact" class="kc-btn-gold" style="padding: 0.6rem 1.5rem; font-size: 0.75rem;">
+            <span>Begin Your Journey</span>
+          </a>
+        </li>
+      </ul>
+
+      {%- comment -%} ── Mobile Hamburger ── {%- endcomment -%}
+      <button
+        class="kc-nav__hamburger"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+        aria-controls="kc-mobile-menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+    {%- comment -%} ── Mobile Menu ── {%- endcomment -%}
+    <div id="kc-mobile-menu" class="kc-nav__mobile" role="menu">
+      <a href="#about" role="menuitem">About</a>
+      <a href="#offerings" role="menuitem">The Toolkit</a>
+      <a href="#contact" role="menuitem">Contact</a>
+      <a href="#contact" class="kc-btn-gold" style="text-align: center; margin-top: 0.5rem;" role="menuitem">
+        <span>Begin Your Journey</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+{%- comment -%} ── Scroll Progress Indicator ── {%- endcomment -%}
+<div class="kc-scroll-progress" aria-hidden="true">
+  <div class="kc-scroll-progress__fill"></div>
+</div>
