@@ -1,376 +1,206 @@
 {% comment %}
   ============================================================
-  KC THEORY — Cinematic Hero Section
-  Version: 2.0 (2026 Redesign)
-  Description: Full-viewport cinematic hero with parallax depth,
-               god-ray overlay, bold typography, and dual CTAs.
-               Designed for the "Lone Adventurer" brand narrative.
+  KC Theory — Hero Section (Cinematic)
+  ============================================================
+  File        : sections/kc-hero-cinematic.liquid
+  Description : Full-screen cinematic hero with parallax
+                background, volumetric god-rays overlay,
+                stagger reveal animations, and dual CTAs.
+  Assets      : kc_hero_theory_final.png (upload to theme assets)
   ============================================================
 {% endcomment %}
 
-{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
-
 <section
-  class="kc-hero-cinematic"
-  id="kc-hero-cinematic"
-  data-parallax="true"
-  aria-label="Hero section"
+  id="hero"
+  class="kc-hero"
+  style="
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #001020;
+  "
 >
-  {%- comment -%} Background image layer {%- endcomment -%}
-  <div class="kc-hero-cinematic__bg" aria-hidden="true">
-    {%- if section.settings.hero_image != blank -%}
-      <img
-        src="{{ section.settings.hero_image | image_url: width: 2400 }}"
-        srcset="
-          {{ section.settings.hero_image | image_url: width: 800 }} 800w,
-          {{ section.settings.hero_image | image_url: width: 1200 }} 1200w,
-          {{ section.settings.hero_image | image_url: width: 1800 }} 1800w,
-          {{ section.settings.hero_image | image_url: width: 2400 }} 2400w
-        "
-        sizes="100vw"
-        alt="{{ section.settings.hero_image.alt | escape }}"
-        class="kc-hero-cinematic__bg-img"
-        loading="eager"
-        fetchpriority="high"
+
+  {%- comment -%} ── Parallax Background ── {%- endcomment -%}
+  <div
+    class="kc-hero__parallax-bg"
+    style="
+      position: absolute;
+      inset: -20%;
+      background-image: url('{{ section.settings.hero_image | default: 'kc_hero_theory_final.png' | asset_url }}');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      will-change: transform;
+    "
+  ></div>
+
+  {%- comment -%} ── Dark Gradient Overlay ── {%- endcomment -%}
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,10,20,0.3)  0%,
+      rgba(0,10,20,0.55) 40%,
+      rgba(0,10,20,0.85) 80%,
+      rgba(0,10,20,1)    100%
+    );
+  "></div>
+
+  {%- comment -%} ── Volumetric God-Rays ── {%- endcomment -%}
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 25%, rgba(212,168,83,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  "></div>
+
+  {%- comment -%} ── Content ── {%- endcomment -%}
+  <div class="kc-container" style="
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+  ">
+
+    {%- comment -%} Pre-headline {%- endcomment -%}
+    <span
+      class="kc-eyebrow kc-reveal"
+      style="margin-bottom: 1.5rem;"
+    >
+      {{ section.settings.eyebrow | default: "The 3 C's: Commitment · Consistency · Compassion" }}
+    </span>
+
+    {%- comment -%} Main Headline Line 1 {%- endcomment -%}
+    <h1
+      class="kc-reveal kc-reveal--delay-1"
+      style="
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: clamp(3rem, 9vw, 7.5rem);
+        letter-spacing: -0.03em;
+        line-height: 1.0;
+        color: #ffffff;
+        margin: 0 0 0.2em;
+        text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+      "
+    >
+      {{ section.settings.headline_line1 | default: "Stop Surviving." }}
+    </h1>
+
+    {%- comment -%} Main Headline Line 2 (gold gradient) {%- endcomment -%}
+    <h1
+      class="kc-reveal kc-reveal--delay-2"
+      style="
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: clamp(3rem, 9vw, 7.5rem);
+        letter-spacing: -0.03em;
+        line-height: 1.0;
+        background: linear-gradient(135deg, #C0A060, #E8C46A, #D4A853);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin: 0 0 1.5rem;
+        filter: drop-shadow(0 0 20px rgba(212,168,83,0.3));
+      "
+    >
+      {{ section.settings.headline_line2 | default: "Start Climbing." }}
+    </h1>
+
+    {%- comment -%} Gold divider {%- endcomment -%}
+    <div
+      class="kc-reveal kc-reveal--delay-3"
+      style="margin-bottom: 2rem;"
+    >
+      <div class="kc-divider" style="width: 80px; margin: 0 auto;"></div>
+    </div>
+
+    {%- comment -%} Subheadline {%- endcomment -%}
+    <p
+      class="kc-reveal kc-reveal--delay-4"
+      style="
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+        line-height: 1.8;
+        color: rgba(255,255,255,0.75);
+        max-width: 640px;
+        margin: 0 auto 2.5rem;
+      "
+    >
+      {{ section.settings.subheadline | default: "Practical, no-bullshit strategies for navigating ADHD, trauma, and the chaos of your own mind. Built on lived experience, grounded in the 3 C's: Commitment, Consistency, and Compassion." }}
+    </p>
+
+    {%- comment -%} CTA Buttons {%- endcomment -%}
+    <div
+      class="kc-reveal kc-reveal--delay-5"
+      style="
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      "
+    >
+      <a
+        href="{{ section.settings.cta_primary_url | default: '#contact' }}"
+        class="kc-btn-gold"
       >
-    {%- else -%}
-      <div class="kc-hero-cinematic__bg-placeholder" aria-hidden="true"></div>
-    {%- endif -%}
+        <span>{{ section.settings.cta_primary_label | default: "Get the Free Guide" }}</span>
+      </a>
+      <a
+        href="{{ section.settings.cta_secondary_url | default: '#offerings' }}"
+        class="kc-btn-outline"
+      >
+        {{ section.settings.cta_secondary_label | default: "Explore the 10 Core Areas" }}
+      </a>
+    </div>
 
-    {%- comment -%} Cinematic overlay layers {%- endcomment -%}
-    <div class="kc-hero-cinematic__overlay kc-hero-cinematic__overlay--gradient" aria-hidden="true"></div>
-    <div class="kc-hero-cinematic__overlay kc-hero-cinematic__overlay--vignette" aria-hidden="true"></div>
-    <div class="kc-hero-cinematic__overlay kc-hero-cinematic__overlay--god-rays" aria-hidden="true"></div>
   </div>
 
-  {%- comment -%} Content layer {%- endcomment -%}
-  <div class="kc-hero-cinematic__content kc-container">
-    <div class="kc-hero-cinematic__inner">
-
-      {%- comment -%} Eyebrow label {%- endcomment -%}
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="kc-eyebrow kc-hero-cinematic__eyebrow kc-animate-fade-up">
-          {{ section.settings.eyebrow }}
-        </p>
-      {%- endif -%}
-
-      {%- comment -%} Main headline {%- endcomment -%}
-      <h1 class="kc-hero-cinematic__headline kc-animate-fade-up kc-animate-fade-up--delay-1">
-        {{ section.settings.headline | default: "Clarity.<br>Control.<br>Confidence." }}
-      </h1>
-
-      {%- comment -%} Subheadline {%- endcomment -%}
-      {%- if section.settings.subheadline != blank -%}
-        <p class="kc-hero-cinematic__subheadline kc-body-lg kc-animate-fade-up kc-animate-fade-up--delay-2">
-          {{ section.settings.subheadline }}
-        </p>
-      {%- endif -%}
-
-      {%- comment -%} CTA Buttons {%- endcomment -%}
-      <div class="kc-hero-cinematic__ctas kc-animate-fade-up kc-animate-fade-up--delay-3">
-        {%- if section.settings.primary_cta_text != blank -%}
-          <a
-            href="{{ section.settings.primary_cta_url | default: '/pages/quiz' }}"
-            class="kc-btn kc-btn--primary kc-glow-pulse"
-            aria-label="{{ section.settings.primary_cta_text }}"
-          >
-            {{ section.settings.primary_cta_text }}
-          </a>
-        {%- endif -%}
-
-        {%- if section.settings.secondary_cta_text != blank -%}
-          <a
-            href="{{ section.settings.secondary_cta_url | default: '/collections/all' }}"
-            class="kc-btn kc-btn--secondary"
-            aria-label="{{ section.settings.secondary_cta_text }}"
-          >
-            {{ section.settings.secondary_cta_text }}
-          </a>
-        {%- endif -%}
-      </div>
-
-      {%- comment -%} Trust bar {%- endcomment -%}
-      {%- if section.settings.show_trust_bar -%}
-        <div class="kc-hero-cinematic__trust kc-animate-fade-up kc-animate-fade-up--delay-3">
-          <span class="kc-hero-cinematic__trust-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            Lived experience. Not clinical jargon.
-          </span>
-          <span class="kc-hero-cinematic__trust-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Built for men who think differently.
-          </span>
-          <span class="kc-hero-cinematic__trust-item">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Australian owned & operated.
-          </span>
-        </div>
-      {%- endif -%}
-
-    </div>
+  {%- comment -%} ── Scroll Indicator ── {%- endcomment -%}
+  <div
+    class="kc-hero__scroll-indicator kc-reveal kc-reveal--delay-6"
+    style="
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    "
+  >
+    <span style="
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    ">Scroll</span>
+    <svg
+      width="20" height="20" viewBox="0 0 24 24" fill="none"
+      stroke="rgba(212,168,83,0.6)" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      style="animation: bounceY 1.5s ease-in-out infinite;"
+    >
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
   </div>
-
-  {%- comment -%} Scroll indicator {%- endcomment -%}
-  {%- if section.settings.show_scroll_indicator -%}
-    <div class="kc-hero-cinematic__scroll" aria-hidden="true">
-      <span class="kc-hero-cinematic__scroll-line"></span>
-    </div>
-  {%- endif -%}
 
 </section>
 
-<style>
-  /* ---- Hero Cinematic Section Styles ---- */
-  .kc-hero-cinematic {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    background-color: var(--kc-navy-deep);
-  }
-
-  /* Background */
-  .kc-hero-cinematic__bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .kc-hero-cinematic__bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    transform: scale(1.05);
-    transition: transform 0.1s linear;
-    will-change: transform;
-  }
-
-  .kc-hero-cinematic__bg-placeholder {
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(ellipse at 60% 40%, #003060 0%, #001020 70%);
-  }
-
-  /* Overlay layers */
-  .kc-hero-cinematic__overlay {
-    position: absolute;
-    inset: 0;
-  }
-
-  .kc-hero-cinematic__overlay--gradient {
-    background: linear-gradient(
-      105deg,
-      rgba(0, 10, 20, 0.88) 0%,
-      rgba(0, 20, 40, 0.70) 40%,
-      rgba(0, 30, 60, 0.30) 100%
-    );
-    z-index: 1;
-  }
-
-  .kc-hero-cinematic__overlay--vignette {
-    background: radial-gradient(
-      ellipse at center,
-      transparent 40%,
-      rgba(0, 5, 15, 0.7) 100%
-    );
-    z-index: 2;
-  }
-
-  .kc-hero-cinematic__overlay--god-rays {
-    background: radial-gradient(
-      ellipse 60% 80% at 65% 20%,
-      rgba(192, 160, 96, 0.08) 0%,
-      transparent 70%
-    );
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  /* Content */
-  .kc-hero-cinematic__content {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    padding-top: clamp(5rem, 12vh, 9rem);
-    padding-bottom: clamp(4rem, 10vh, 7rem);
-  }
-
-  .kc-hero-cinematic__inner {
-    max-width: 720px;
-  }
-
-  /* Eyebrow */
-  .kc-hero-cinematic__eyebrow {
-    margin-bottom: 1.25rem;
-  }
-
-  /* Headline */
-  .kc-hero-cinematic__headline {
-    font-family: var(--kc-font-heading);
-    font-size: clamp(3.5rem, 9vw, 8rem);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.03em;
-    color: var(--kc-white);
-    margin: 0 0 1.5rem;
-    text-shadow: 0 4px 32px rgba(0, 0, 0, 0.6);
-  }
-
-  /* Subheadline */
-  .kc-hero-cinematic__subheadline {
-    max-width: 560px;
-    margin-bottom: 2.5rem;
-    color: var(--kc-mist);
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  }
-
-  /* CTAs */
-  .kc-hero-cinematic__ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .kc-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.9em 2.25em;
-    border-radius: var(--kc-radius);
-    font-family: var(--kc-font-heading);
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: var(--kc-transition);
-    cursor: pointer;
-    border: 2px solid transparent;
-    white-space: nowrap;
-  }
-
-  .kc-btn--primary {
-    background: linear-gradient(135deg, var(--kc-gold), var(--kc-gold-bright));
-    color: var(--kc-navy-deep);
-    border-color: transparent;
-  }
-
-  .kc-btn--primary:hover {
-    background: linear-gradient(135deg, var(--kc-gold-bright), var(--kc-gold));
-    color: var(--kc-navy-deep);
-    transform: translateY(-2px);
-    box-shadow: var(--kc-glow-gold);
-  }
-
-  .kc-btn--secondary {
-    background: transparent;
-    color: var(--kc-white);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-
-  .kc-btn--secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--kc-gold);
-    color: var(--kc-gold);
-    transform: translateY(-2px);
-  }
-
-  /* Trust bar */
-  .kc-hero-cinematic__trust {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .kc-hero-cinematic__trust-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8rem;
-    color: var(--kc-mist);
-    opacity: 0.8;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-  }
-
-  .kc-hero-cinematic__trust-item svg {
-    color: var(--kc-gold);
-    flex-shrink: 0;
-  }
-
-  /* Scroll indicator */
-  .kc-hero-cinematic__scroll {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .kc-hero-cinematic__scroll-line {
-    display: block;
-    width: 1px;
-    height: 60px;
-    background: linear-gradient(to bottom, var(--kc-gold), transparent);
-    animation: kc-scroll-line 2s ease-in-out infinite;
-  }
-
-  @keyframes kc-scroll-line {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
-    50%       { opacity: 1;   transform: scaleY(1); }
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .kc-hero-cinematic__headline {
-      font-size: clamp(3rem, 14vw, 5rem);
-    }
-    .kc-hero-cinematic__trust {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-  }
-</style>
-
-<script>
-  /* Parallax scroll effect for hero background */
-  (function() {
-    var hero = document.getElementById('kc-hero-cinematic');
-    if (!hero || !hero.dataset.parallax) return;
-    var bg = hero.querySelector('.kc-hero-cinematic__bg-img');
-    if (!bg) return;
-
-    var ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        requestAnimationFrame(function() {
-          var scrollY = window.scrollY;
-          var heroH = hero.offsetHeight;
-          if (scrollY < heroH) {
-            var offset = scrollY * 0.35;
-            bg.style.transform = 'scale(1.05) translateY(' + offset + 'px)';
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-</script>
-
 {% schema %}
 {
-  "name": "KC Cinematic Hero",
+  "name": "KC Hero — Cinematic",
   "tag": "section",
   "class": "kc-section-hero",
   "settings": [
@@ -378,19 +208,25 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero Background Image",
-      "info": "Recommended: 2400×1600px or wider. Use the KC Theory 'Lone Adventurer' mountain image."
+      "info": "Recommended: kc_hero_theory_final.png — 1920×1080px minimum"
     },
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow Label",
+      "label": "Eyebrow Text",
       "default": "The 3 C's: Commitment · Consistency · Compassion"
     },
     {
-      "type": "richtext",
-      "id": "headline",
-      "label": "Main Headline",
-      "default": "<p>Stop Surviving.<br><span class=\"kc-gold-text\">Start Climbing.</span></p>"
+      "type": "text",
+      "id": "headline_line1",
+      "label": "Headline — Line 1 (white)",
+      "default": "Stop Surviving."
+    },
+    {
+      "type": "text",
+      "id": "headline_line2",
+      "label": "Headline — Line 2 (gold gradient)",
+      "default": "Start Climbing."
     },
     {
       "type": "textarea",
@@ -400,50 +236,30 @@
     },
     {
       "type": "text",
-      "id": "primary_cta_text",
-      "label": "Primary CTA Text",
+      "id": "cta_primary_label",
+      "label": "Primary CTA Label",
       "default": "Get the Free Guide"
     },
     {
       "type": "url",
-      "id": "primary_cta_url",
+      "id": "cta_primary_url",
       "label": "Primary CTA URL"
     },
     {
       "type": "text",
-      "id": "secondary_cta_text",
-      "label": "Secondary CTA Text",
+      "id": "cta_secondary_label",
+      "label": "Secondary CTA Label",
       "default": "Explore the 10 Core Areas"
     },
     {
       "type": "url",
-      "id": "secondary_cta_url",
+      "id": "cta_secondary_url",
       "label": "Secondary CTA URL"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_trust_bar",
-      "label": "Show Trust Bar",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_scroll_indicator",
-      "label": "Show Scroll Indicator",
-      "default": true
     }
   ],
   "presets": [
     {
-      "name": "KC Cinematic Hero",
-      "settings": {
-        "eyebrow": "The KC Theory",
-        "subheadline": "Built for men who think differently. Practical tools, lived-experience coaching, and a system that actually works for the ADHD brain.",
-        "primary_cta_text": "Start Your Focus Assessment",
-        "secondary_cta_text": "Explore the Tools",
-        "show_trust_bar": true,
-        "show_scroll_indicator": true
-      }
+      "name": "KC Hero — Cinematic"
     }
   ]
 }
