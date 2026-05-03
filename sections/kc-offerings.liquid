@@ -1,0 +1,375 @@
+{% comment %}
+  KC Theory — The Toolkit / 10 Core Areas Section
+  Design: Dark background with offerings background image, 10 pillar cards in a responsive grid
+  Each card: numbered, icon, title, description
+  Brand: Deep Navy + Radiant Gold | Montserrat headings | Open Sans body
+{% endcomment %}
+
+{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="kc-offerings" id="kc-offerings" data-section-id="{{ section.id }}">
+
+  <div class="kc-offerings__bg" style="background-image: url('{{ 'kc-offerings-bg.jpg' | asset_url }}');"></div>
+  <div class="kc-offerings__overlay"></div>
+
+  <div class="kc-offerings__container kc-container">
+
+    <div class="kc-offerings__header">
+      <span class="kc-eyebrow kc-animate-fade-up">{{ section.settings.eyebrow | default: 'The Toolkit' }}</span>
+      <h2 class="kc-offerings__headline kc-animate-fade-up kc-animate-fade-up--delay-1">
+        {{ section.settings.headline | default: 'The 10 Core Areas' }}
+      </h2>
+      <div class="kc-offerings__divider kc-animate-fade-up kc-animate-fade-up--delay-1"></div>
+      <p class="kc-offerings__intro kc-animate-fade-up kc-animate-fade-up--delay-2">
+        {{ section.settings.intro | default: "These aren't just topics. They're the pillars I've personally had to rebuild. Each one is a core area where ADHD, trauma, and mental health intersect with daily life — and where real, practical change is possible." }}
+      </p>
+    </div>
+
+    <div class="kc-offerings__grid">
+      {%- for block in section.blocks -%}
+        <div class="kc-offerings__card kc-animate-fade-up" {{ block.shopify_attributes }}>
+          <div class="kc-offerings__card-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          <div class="kc-offerings__card-icon" aria-hidden="true">{{ block.settings.icon_svg }}</div>
+          <h3 class="kc-offerings__card-title">{{ block.settings.title }}</h3>
+          <p class="kc-offerings__card-desc">{{ block.settings.description }}</p>
+          {%- if block.settings.cta_label != blank -%}
+            <a href="{{ block.settings.cta_link | default: '#' }}" class="kc-offerings__card-link">
+              {{ block.settings.cta_label }} &rarr;
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+.kc-offerings {
+  position: relative;
+  background: #000a18;
+  overflow: hidden;
+}
+
+.kc-offerings__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  opacity: 0.18;
+}
+
+@media (max-width: 768px) {
+  .kc-offerings__bg { background-attachment: scroll; }
+}
+
+.kc-offerings__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,10,24,0.92) 0%, rgba(0,10,24,0.75) 40%, rgba(0,10,24,0.92) 100%);
+}
+
+.kc-offerings__container {
+  position: relative;
+  z-index: 10;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.kc-offerings__header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kc-offerings__headline {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(1.8rem, 4vw, 3rem) !important;
+  letter-spacing: -0.02em !important;
+  color: #ffffff !important;
+  margin: 0.75rem 0 0 !important;
+  line-height: 1.1 !important;
+}
+
+.kc-offerings__divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.6), transparent);
+  margin: 1.25rem auto;
+}
+
+.kc-offerings__intro {
+  font-family: 'Open Sans', sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1rem);
+  line-height: 1.8;
+  color: rgba(255,255,255,0.60);
+  margin: 0;
+}
+
+.kc-offerings__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .kc-offerings__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .kc-offerings__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.kc-offerings__card {
+  background: rgba(0,20,40,0.55);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.kc-offerings__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0), transparent);
+  transition: all 0.4s ease;
+}
+
+.kc-offerings__card:hover {
+  background: rgba(0,30,60,0.75);
+  border-color: rgba(212,168,83,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.kc-offerings__card:hover::before {
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.6), transparent);
+}
+
+.kc-offerings__card-num {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(212,168,83,0.45);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.kc-offerings__card-icon {
+  width: 36px;
+  height: 36px;
+  color: rgba(212,168,83,0.75);
+  flex-shrink: 0;
+}
+
+.kc-offerings__card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.kc-offerings__card-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  color: #ffffff !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+}
+
+.kc-offerings__card-desc {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+  margin: 0;
+  flex: 1;
+}
+
+.kc-offerings__card-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(212,168,83,0.7) !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-top: auto;
+}
+
+.kc-offerings__card-link:hover {
+  color: #E8C46A !important;
+  text-decoration: none;
+}
+</style>
+
+{% schema %}
+{
+  "name": "KC Offerings",
+  "tag": "section",
+  "class": "kc-section-offerings",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "The Toolkit"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "The 10 Core Areas"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Intro Paragraph",
+      "default": "These aren't just topics. They're the pillars I've personally had to rebuild. Each one is a core area where ADHD, trauma, and mental health intersect with daily life — and where real, practical change is possible."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_svg",
+          "label": "Icon SVG (paste raw SVG)",
+          "default": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M12 2L2 7l10 5 10-5-10-5z'/><path d='M2 17l10 5 10-5'/><path d='M2 12l10 5 10-5'/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Pillar Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A short description of this pillar and how it helps."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA Label (optional)"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "KC Offerings",
+      "blocks": [
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "ADHD Management",
+            "description": "Practical systems for managing attention, hyperfocus, and the chaos of an ADHD brain — without the shame spiral.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Emotional Regulation",
+            "description": "Learning to feel your feelings without being hijacked by them. Tools for when your nervous system goes haywire.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Trauma & PTSD",
+            "description": "Understanding how trauma rewires your brain and the practical steps to start healing — without reliving it over and over.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Relationships",
+            "description": "How ADHD and trauma affect the people around you, and how to build connections that don't fall apart under pressure.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M23 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Identity & Self-Worth",
+            "description": "Rebuilding who you are after years of being told you're broken, lazy, or not enough. Spoiler: you're not.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><circle cx='12' cy='8' r='6'/><path d='M15.477 12.89L17 22l-5-3-5 3 1.523-9.11'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Productivity & Focus",
+            "description": "Systems that actually work for the ADHD brain. Not productivity hacks from neurotypical gurus — real tools for real brains.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polyline points='22 12 18 12 15 21 9 3 6 12 2 12'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Sleep & Recovery",
+            "description": "Why your brain fights sleep and what to do about it. Recovery isn't optional — it's the foundation everything else is built on.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Physical Health",
+            "description": "The connection between your body and your brain is real. Simple, sustainable movement and nutrition that supports mental health.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><path d='M18 8h1a4 4 0 0 1 0 8h-1'/><path d='M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z'/><line x1='6' y1='1' x2='6' y2='4'/><line x1='10' y1='1' x2='10' y2='4'/><line x1='14' y1='1' x2='14' y2='4'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Financial Clarity",
+            "description": "ADHD and money is a disaster waiting to happen. Practical frameworks for getting your finances under control without the shame.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><line x1='12' y1='1' x2='12' y2='23'/><path d='M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6'/></svg>"
+          }
+        },
+        {
+          "type": "pillar",
+          "settings": {
+            "title": "Purpose & Direction",
+            "description": "Finding what actually matters to you — not what you think should matter — and building a life that's worth showing up for.",
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'><polygon points='3 11 22 2 13 21 11 13 3 11'/></svg>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
