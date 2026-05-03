@@ -1,0 +1,25 @@
+{% comment %}
+  ============================================================
+  KC Theory — Head Assets Snippet
+  ============================================================
+  File        : snippets/kc-head-assets.liquid
+  Description : Injects all KC Theory CSS and JS into <head>
+                and end of <body>.
+  Usage       : Add {% render 'kc-head-assets' %} inside the
+                <head> tag of theme.liquid, and add the JS
+                script tag before </body>.
+
+  FULL INTEGRATION STEPS FOR theme.liquid:
+  ─────────────────────────────────────────
+  1. In <head>, add:
+       {% render 'kc-head-assets' %}
+
+  2. Inside <body>, before </body>, add:
+       <script src="{{ 'kc-brand.js' | asset_url }}" defer></script>
+
+  3. Inside <body>, right after <body>, add:
+       {% render 'kc-nav' %}
+  ============================================================
+{% endcomment %}
+
+{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
