@@ -1,0 +1,221 @@
+{% comment %}
+  KC Theory — About Section
+  Design: Parallax rocky mountain background (lone hiker at golden sunrise)
+  Left-aligned narrative text, gold blockquote, CTA button
+  Brand: Deep Navy + Radiant Gold | Montserrat headings | Open Sans body
+{% endcomment %}
+
+{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="kc-about" id="kc-about" data-section-id="{{ section.id }}">
+
+  <div class="kc-about__bg" style="background-image: url('{{ 'kc-about-bg.jpg' | asset_url }}');"></div>
+  <div class="kc-about__overlay"></div>
+  <div class="kc-about__glow"></div>
+  <div class="kc-about__section-num" aria-hidden="true">01</div>
+
+  <div class="kc-about__container kc-container">
+    <div class="kc-about__content">
+
+      <span class="kc-eyebrow kc-animate-fade-up">{{ section.settings.eyebrow | default: 'About' }}</span>
+      <div class="kc-about__divider kc-animate-fade-up"></div>
+
+      <h2 class="kc-about__headline kc-animate-fade-up kc-animate-fade-up--delay-1">
+        {{ section.settings.headline | default: "G'day, I'm Just Some Bloke Who Figured Some Shit Out." }}
+      </h2>
+
+      <div class="kc-about__body kc-animate-fade-up kc-animate-fade-up--delay-2">
+        {{ section.settings.body_text | default: "<p>Look, I'm not going to start this off with a bunch of fancy credentials or tell you I'm some sort of guru who's got it all figured out. Truth is, I'm just an average bloke who's seen some shit, done some shit, and somehow managed to get over some shit.</p><p>I've been through the wringer with ADHD, PTSD, depression, and anxiety. I know what it's like to wake up and feel like your brain is trying to sabotage you. I spent years trying everything — therapy, medication, self-help books that made me want to punch something — and most of it felt like pissing in the wind.</p><p>But slowly, I started to figure out what actually worked. Not just what the clinical textbooks said should work, but what made a difference in the trenches of day-to-day life.</p><p>That's what The KC Theory is. It's not academic nonsense. It's a practical toolkit built on three simple things: Commitment to doing the work, Consistency in your efforts, and Compassion for yourself when you inevitably stuff up.</p>" }}
+      </div>
+
+      <blockquote class="kc-about__quote kc-animate-fade-up kc-animate-fade-up--delay-2">
+        {{ section.settings.quote | default: "I'm not a doctor, and this isn't a magic bullet. But if you're tired of feeling stuck and ready to build something better, you're in the right place." }}
+      </blockquote>
+
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_link | default: '#' }}" class="kc-btn kc-btn--secondary kc-animate-fade-up kc-animate-fade-up--delay-3">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+
+    </div>
+  </div>
+
+</section>
+
+<style>
+.kc-about {
+  position: relative;
+  overflow: hidden;
+  background: #000e1c;
+}
+
+.kc-about__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 40%;
+  background-attachment: fixed;
+  opacity: 0.35;
+}
+
+@media (max-width: 768px) {
+  .kc-about__bg { background-attachment: scroll; }
+}
+
+.kc-about__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,14,28,0.88) 0%, rgba(0,14,28,0.60) 30%, rgba(0,14,28,0.72) 70%, rgba(0,14,28,0.95) 100%);
+}
+
+.kc-about__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 60%, rgba(212,168,83,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.kc-about__section-num {
+  position: absolute;
+  top: -2rem;
+  left: -1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(6rem, 15vw, 14rem);
+  color: rgba(255,255,255,0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.kc-about__container {
+  position: relative;
+  z-index: 10;
+  padding-top: clamp(4rem, 10vw, 7rem);
+  padding-bottom: clamp(4rem, 10vw, 7rem);
+}
+
+.kc-about__content {
+  max-width: 760px;
+}
+
+.kc-about__divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.6), transparent);
+  margin: 1rem 0 2rem;
+}
+
+.kc-about__headline {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: clamp(1.8rem, 4.5vw, 3.5rem) !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.1 !important;
+  color: #ffffff !important;
+  margin-bottom: 2rem !important;
+}
+
+.kc-about__body {
+  margin-bottom: 1.5rem;
+}
+
+.kc-about__body p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.85;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 1.25rem;
+}
+
+.kc-about__quote {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+  line-height: 1.8;
+  color: rgba(255,255,255,0.85);
+  border-left: 3px solid rgba(212,168,83,0.55);
+  padding-left: 1.25rem;
+  margin: 0 0 2.5rem;
+  font-style: normal;
+}
+
+.kc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85em 2.25em;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.kc-btn--secondary {
+  background: transparent;
+  color: rgba(212,168,83,0.9) !important;
+  border: 1px solid rgba(212,168,83,0.45);
+}
+
+.kc-btn--secondary:hover {
+  border-color: rgba(212,168,83,0.9);
+  color: #E8C46A !important;
+  box-shadow: 0 0 20px rgba(212,168,83,0.2);
+  text-decoration: none;
+}
+</style>
+
+{% schema %}
+{
+  "name": "KC About",
+  "tag": "section",
+  "class": "kc-section-about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "About"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "G'day, I'm Just Some Bloke Who Figured Some Shit Out."
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body Text"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Blockquote",
+      "default": "I'm not a doctor, and this isn't a magic bullet. But if you're tired of feeling stuck and ready to build something better, you're in the right place."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Button Label",
+      "default": "Read My Full Story"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "KC About"
+    }
+  ]
+}
+{% endschema %}
