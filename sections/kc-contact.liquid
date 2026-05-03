@@ -1,356 +1,370 @@
 {% comment %}
-  KC Theory — Contact / Get in Touch Section
-  Design: Starfield night horizon background, dark navy form with gold focus states
-  Left: heading + copy | Right: contact form
-  Brand: Deep Navy + Radiant Gold | Montserrat headings | Open Sans body
+  ============================================================
+  KC Theory — Contact Section
+  ============================================================
+  File        : sections/kc-contact.liquid
+  Description : Dark navy contact form using Shopify's native
+                {% form 'contact' %} tag, cinematic night sky
+                background, gold focus glow on inputs,
+                scroll-reveal animations, and footer bar.
+  Assets      : kc-contact-bg.jpg (upload to theme assets)
+  Note        : Shopify's contact form sends messages to the
+                store email. No third-party service required.
+  ============================================================
 {% endcomment %}
 
-{{ 'kc-brand.css' | asset_url | stylesheet_tag }}
+<section
+  id="contact"
+  style="
+    position: relative;
+    overflow: hidden;
+    background: #000810;
+  "
+>
 
-<section class="kc-contact" id="kc-contact" data-section-id="{{ section.id }}">
+  {%- comment -%} ── Background ── {%- endcomment -%}
+  <div
+    class="kc-parallax-bg"
+    style="
+      position: absolute;
+      inset: 0;
+      background-image: url('{{ section.settings.bg_image | default: 'kc-contact-bg.jpg' | asset_url }}');
+      background-size: cover;
+      background-position: center bottom;
+      opacity: 0.5;
+    "
+  ></div>
 
-  <div class="kc-contact__bg" style="background-image: url('{{ 'kc-contact-bg.jpg' | asset_url }}');"></div>
-  <div class="kc-contact__overlay"></div>
+  {%- comment -%} ── Overlay ── {%- endcomment -%}
+  <div style="
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,8,16,0.9)  0%,
+      rgba(0,8,16,0.7)  40%,
+      rgba(0,8,16,0.9)  100%
+    );
+  "></div>
 
-  <div class="kc-contact__container kc-container">
-    <div class="kc-contact__layout">
+  {%- comment -%} ── Section Number Watermark ── {%- endcomment -%}
+  <div class="kc-section-num" style="top: -2rem; left: -1rem;">03</div>
 
-      <!-- Left: Copy -->
-      <div class="kc-contact__copy">
-        <span class="kc-eyebrow kc-animate-fade-up">{{ section.settings.eyebrow | default: 'Get in Touch' }}</span>
-        <div class="kc-contact__divider kc-animate-fade-up"></div>
-        <h2 class="kc-contact__headline kc-animate-fade-up kc-animate-fade-up--delay-1">
-          {{ section.settings.headline | default: "Ready to Start Climbing?" }}
-        </h2>
-        <p class="kc-contact__body kc-animate-fade-up kc-animate-fade-up--delay-2">
-          {{ section.settings.body | default: "Whether you've got a question, want to work together, or just want to say g'day — I'm here. No corporate bullshit, no automated responses. Just a real conversation." }}
-        </p>
+  {%- comment -%} ── Content ── {%- endcomment -%}
+  <div class="kc-container" style="
+    position: relative;
+    z-index: 10;
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+  ">
+    <div style="max-width: 680px; margin: 0 auto;">
 
-        <div class="kc-contact__details kc-animate-fade-up kc-animate-fade-up--delay-2">
-          {%- if section.settings.email != blank -%}
-            <div class="kc-contact__detail-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,83,0.7)" stroke-width="1.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <a href="mailto:{{ section.settings.email }}" class="kc-contact__detail-link">{{ section.settings.email }}</a>
-            </div>
-          {%- endif -%}
-          {%- if section.settings.instagram != blank -%}
-            <div class="kc-contact__detail-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,83,0.7)" stroke-width="1.5" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              <a href="https://instagram.com/{{ section.settings.instagram }}" target="_blank" rel="noopener" class="kc-contact__detail-link">@{{ section.settings.instagram }}</a>
-            </div>
-          {%- endif -%}
+      {%- comment -%} Eyebrow {%- endcomment -%}
+      <span class="kc-eyebrow kc-reveal" style="margin-bottom: 1rem; text-align: center; display: block;">
+        {{ section.settings.eyebrow | default: "Get in Touch" }}
+      </span>
+
+      {%- comment -%} Gold Divider {%- endcomment -%}
+      <div class="kc-reveal kc-reveal--delay-1" style="text-align: center; margin-bottom: 2rem;">
+        <div class="kc-divider" style="width: 60px; margin: 0 auto;"></div>
+      </div>
+
+      {%- comment -%} Headline {%- endcomment -%}
+      <h2
+        class="kc-reveal kc-reveal--delay-2"
+        style="
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+          letter-spacing: -0.02em;
+          line-height: 1.1;
+          color: #ffffff;
+          margin-bottom: 1.25rem;
+          text-align: center;
+        "
+      >
+        {{ section.settings.headline | default: "Ready to" }}
+        <span class="kc-gold-text">
+          {{ section.settings.headline_gold | default: "Do the Work?" }}
+        </span>
+      </h2>
+
+      {%- comment -%} Intro copy {%- endcomment -%}
+      <p
+        class="kc-reveal kc-reveal--delay-3"
+        style="
+          font-family: 'Open Sans', sans-serif;
+          font-size: clamp(0.9rem, 1.8vw, 1rem);
+          line-height: 1.8;
+          color: rgba(255,255,255,0.6);
+          margin-bottom: 0.75rem;
+          text-align: center;
+        "
+      >
+        {{ section.settings.intro | default: "If you've got questions, need some direction on where to start, or just want to say g'day, drop a line below." }}
+      </p>
+
+      <p
+        class="kc-reveal kc-reveal--delay-4"
+        style="
+          font-family: 'Open Sans', sans-serif;
+          font-size: 0.85rem;
+          line-height: 1.7;
+          color: rgba(255,255,255,0.4);
+          margin-bottom: 2.5rem;
+          text-align: center;
+          font-style: italic;
+        "
+      >
+        {{ section.settings.note | default: "Note: I provide online coaching and guidance only. No automated booking systems here — just real conversations to see if we're a good fit." }}
+      </p>
+
+      {%- comment -%}
+        ── Shopify Native Contact Form ──
+        Messages are delivered to the store's contact email.
+        Success state is handled by Shopify via page reload with
+        ?contact[posted_successfully]=true query parameter.
+      {%- endcomment -%}
+
+      {%- if form.posted_successfully? -%}
+        {%- comment -%} ── Success State ── {%- endcomment -%}
+        <div
+          class="kc-reveal"
+          style="
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(0,20,40,0.7);
+            border: 1px solid rgba(212,168,83,0.3);
+            border-radius: 0.375rem;
+          "
+        >
+          <svg
+            width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="#D4A853" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"
+            style="margin: 0 auto 1rem; display: block;"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <h3 style="
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+          ">Message Sent</h3>
+          <p style="
+            font-family: 'Open Sans', sans-serif;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+            margin: 0;
+          ">
+            Thanks for reaching out. I'll get back to you when I can — usually within a day or two.
+          </p>
         </div>
-      </div>
 
-      <!-- Right: Form -->
-      <div class="kc-contact__form-wrap kc-animate-fade-up kc-animate-fade-up--delay-2">
-        {%- form 'contact', id: 'kc-contact-form', class: 'kc-contact__form' -%}
+      {%- else -%}
+        {%- comment -%} ── Contact Form ── {%- endcomment -%}
+        {% form 'contact' %}
 
-          {%- if form.posted_successfully? -%}
-            <div class="kc-contact__success">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(212,168,83,0.9)" stroke-width="2" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <p>Message sent. I'll get back to you soon.</p>
+          {%- if form.errors -%}
+            <div style="
+              background: rgba(180,40,40,0.2);
+              border: 1px solid rgba(200,60,60,0.4);
+              border-radius: 0.25rem;
+              padding: 1rem 1.25rem;
+              margin-bottom: 1.5rem;
+              font-family: 'Open Sans', sans-serif;
+              font-size: 0.875rem;
+              color: rgba(255,180,180,0.9);
+            ">
+              {{ form.errors | default_errors }}
             </div>
-          {%- else -%}
-
-            <div class="kc-contact__form-row">
-              <div class="kc-contact__field">
-                <label for="ContactFormName" class="kc-contact__label">Name</label>
-                <input type="text" id="ContactFormName" name="contact[name]" class="kc-contact__input" autocomplete="name" placeholder="Your name" required>
-              </div>
-              <div class="kc-contact__field">
-                <label for="ContactFormEmail" class="kc-contact__label">Email</label>
-                <input type="email" id="ContactFormEmail" name="contact[email]" class="kc-contact__input" autocomplete="email" placeholder="your@email.com" required>
-              </div>
-            </div>
-
-            <div class="kc-contact__field">
-              <label for="ContactFormMessage" class="kc-contact__label">Message</label>
-              <textarea id="ContactFormMessage" name="contact[body]" class="kc-contact__input kc-contact__textarea" rows="5" placeholder="What's on your mind?"></textarea>
-            </div>
-
-            <button type="submit" class="kc-btn kc-btn--primary kc-glow-pulse">
-              {{ section.settings.submit_label | default: 'Send Message' }}
-            </button>
-
           {%- endif -%}
 
-        {%- endform -%}
-      </div>
+          <div
+            class="kc-reveal kc-reveal--delay-5"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+              gap: 1.25rem;
+              margin-bottom: 1.25rem;
+            "
+          >
+            {%- comment -%} Name {%- endcomment -%}
+            <div>
+              <label
+                for="ContactFormName"
+                style="
+                  display: block;
+                  font-family: 'Montserrat', sans-serif;
+                  font-weight: 600;
+                  font-size: 0.72rem;
+                  letter-spacing: 0.12em;
+                  text-transform: uppercase;
+                  color: rgba(255,255,255,0.5);
+                  margin-bottom: 0.5rem;
+                "
+              >Name</label>
+              <input
+                type="text"
+                id="ContactFormName"
+                name="contact[name]"
+                autocomplete="name"
+                placeholder="{{ section.settings.name_placeholder | default: 'Your name' }}"
+                value="{{ form.name }}"
+                class="kc-input"
+              >
+            </div>
+
+            {%- comment -%} Email {%- endcomment -%}
+            <div>
+              <label
+                for="ContactFormEmail"
+                style="
+                  display: block;
+                  font-family: 'Montserrat', sans-serif;
+                  font-weight: 600;
+                  font-size: 0.72rem;
+                  letter-spacing: 0.12em;
+                  text-transform: uppercase;
+                  color: rgba(255,255,255,0.5);
+                  margin-bottom: 0.5rem;
+                "
+              >Email</label>
+              <input
+                type="email"
+                id="ContactFormEmail"
+                name="contact[email]"
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                placeholder="{{ section.settings.email_placeholder | default: 'your@email.com' }}"
+                value="{{ form.email }}"
+                class="kc-input"
+                required
+              >
+            </div>
+          </div>
+
+          {%- comment -%} Challenge / Message {%- endcomment -%}
+          <div class="kc-reveal kc-reveal--delay-6" style="margin-bottom: 1.25rem;">
+            <label
+              for="ContactFormMessage"
+              style="
+                display: block;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 600;
+                font-size: 0.72rem;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: rgba(255,255,255,0.5);
+                margin-bottom: 0.5rem;
+              "
+            >
+              {{ section.settings.message_label | default: "What's the biggest challenge you're facing right now?" }}
+            </label>
+            <textarea
+              id="ContactFormMessage"
+              name="contact[body]"
+              rows="5"
+              placeholder="{{ section.settings.message_placeholder | default: 'Tell me what\'s going on...' }}"
+              class="kc-input"
+              style="resize: vertical; min-height: 120px;"
+            >{{ form.body }}</textarea>
+          </div>
+
+          {%- comment -%} Submit {%- endcomment -%}
+          <div class="kc-reveal kc-reveal--delay-7">
+            <button
+              type="submit"
+              class="kc-btn-gold"
+              style="
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+              "
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              <span>{{ section.settings.submit_label | default: "Send Message" }}</span>
+            </button>
+          </div>
+
+        {% endform %}
+      {%- endif -%}
 
     </div>
   </div>
 
-  <!-- Footer bar -->
-  <div class="kc-contact__footer">
+  {%- comment -%} ── Footer Bar ── {%- endcomment -%}
+  <div style="
+    position: relative;
+    z-index: 10;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 0;
+    background: rgba(0,5,12,0.8);
+  ">
     <div class="kc-container">
-      <div class="kc-contact__footer-inner">
-        <span class="kc-contact__footer-brand">
-          <span style="color:#ffffff;">THE</span>
-          <span style="background:linear-gradient(135deg,#C0A060,#E8C46A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">KC</span>
-          <span style="color:#ffffff;">THEORY</span>
-        </span>
-        <span class="kc-contact__footer-copy">
+      <div style="
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        text-align: center;
+      ">
+
+        {%- comment -%} Crisis note {%- endcomment -%}
+        <p style="
+          font-family: 'Open Sans', sans-serif;
+          font-size: 0.8rem;
+          color: rgba(255,255,255,0.35);
+          max-width: 600px;
+          line-height: 1.7;
+          margin: 0;
+        ">
+          {{ section.settings.crisis_note | default: "If you're in crisis, please reach out to a professional or call a helpline." }}
+          <strong style="color: rgba(255,255,255,0.5);">
+            {{ section.settings.crisis_number | default: "Lifeline: 13 11 14" }}
+          </strong>
+          {{ section.settings.crisis_suffix | default: ". The KC Theory is for building a better life, not for when you're hanging on by a thread." }}
+        </p>
+
+        <div class="kc-divider" style="width: 40px;"></div>
+
+        {%- comment -%} Brand wordmark {%- endcomment -%}
+        <div style="
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 900;
+          font-size: 0.9rem;
+          letter-spacing: 0.1em;
+          color: rgba(255,255,255,0.3);
+        ">
+          THE <span class="kc-gold-text">KC</span> THEORY
+        </div>
+
+        {%- comment -%} Copyright {%- endcomment -%}
+        <p style="
+          font-family: 'Open Sans', sans-serif;
+          font-size: 0.75rem;
+          color: rgba(255,255,255,0.2);
+          margin: 0;
+        ">
           &copy; {{ 'now' | date: '%Y' }} The KC Theory. All rights reserved.
-          {%- if section.settings.show_disclaimer -%}
-            &nbsp;&middot;&nbsp;
-            <a href="{{ section.settings.disclaimer_link | default: '/pages/disclaimer' }}" class="kc-contact__footer-link">Disclaimer</a>
-          {%- endif -%}
-        </span>
+        </p>
+
       </div>
     </div>
   </div>
 
 </section>
-
-<style>
-.kc-contact {
-  position: relative;
-  background: #000a18;
-  overflow: hidden;
-}
-
-.kc-contact__bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  opacity: 0.25;
-}
-
-@media (max-width: 768px) {
-  .kc-contact__bg { background-attachment: scroll; }
-}
-
-.kc-contact__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,10,24,0.85) 0%, rgba(0,10,24,0.70) 50%, rgba(0,10,24,0.95) 100%);
-}
-
-.kc-contact__container {
-  position: relative;
-  z-index: 10;
-  padding-top: clamp(4rem, 8vw, 7rem);
-  padding-bottom: clamp(2rem, 4vw, 3rem);
-}
-
-.kc-contact__layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
-}
-
-@media (max-width: 768px) {
-  .kc-contact__layout {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-}
-
-.kc-contact__divider {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(212,168,83,0.6), transparent);
-  margin: 1rem 0 2rem;
-}
-
-.kc-contact__headline {
-  font-family: 'Montserrat', sans-serif !important;
-  font-weight: 900 !important;
-  font-size: clamp(1.8rem, 4vw, 3rem) !important;
-  letter-spacing: -0.02em !important;
-  color: #ffffff !important;
-  margin-bottom: 1.25rem !important;
-  line-height: 1.1 !important;
-}
-
-.kc-contact__body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: clamp(0.9rem, 1.6vw, 1rem);
-  line-height: 1.85;
-  color: rgba(255,255,255,0.60);
-  margin-bottom: 2rem;
-}
-
-.kc-contact__details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.kc-contact__detail-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.kc-contact__detail-link {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.65) !important;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.kc-contact__detail-link:hover {
-  color: rgba(212,168,83,0.9) !important;
-}
-
-/* Form */
-.kc-contact__form-wrap {
-  background: rgba(0,20,40,0.6);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 8px;
-  padding: 2.5rem;
-}
-
-.kc-contact__form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.kc-contact__form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-}
-
-@media (max-width: 480px) {
-  .kc-contact__form-row { grid-template-columns: 1fr; }
-}
-
-.kc-contact__field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.kc-contact__label {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-}
-
-.kc-contact__input {
-  background: rgba(0,30,60,0.7) !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
-  border-radius: 4px !important;
-  color: #ffffff !important;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.9rem;
-  padding: 0.75rem 1rem !important;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-}
-
-.kc-contact__input:focus {
-  border-color: rgba(212,168,83,0.5) !important;
-  box-shadow: 0 0 0 3px rgba(212,168,83,0.1) !important;
-  outline: none !important;
-}
-
-.kc-contact__input::placeholder {
-  color: rgba(255,255,255,0.25) !important;
-}
-
-.kc-contact__textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.kc-contact__success {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: rgba(212,168,83,0.08);
-  border: 1px solid rgba(212,168,83,0.25);
-  border-radius: 6px;
-}
-
-.kc-contact__success p {
-  font-family: 'Open Sans', sans-serif;
-  color: rgba(255,255,255,0.8);
-  margin: 0;
-}
-
-/* Buttons */
-.kc-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85em 2.25em;
-  border-radius: 4px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-}
-
-.kc-btn--primary {
-  background: linear-gradient(135deg, #C0A060, #E8C46A);
-  color: #001020 !important;
-}
-
-.kc-btn--primary:hover {
-  background: linear-gradient(135deg, #E8C46A, #F0D080);
-  box-shadow: 0 0 30px rgba(212,168,83,0.4);
-  transform: translateY(-2px);
-}
-
-/* Footer bar */
-.kc-contact__footer {
-  position: relative;
-  z-index: 10;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 1.5rem 0;
-  margin-top: 3rem;
-}
-
-.kc-contact__footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.kc-contact__footer-brand {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
-  display: flex;
-  gap: 0.3em;
-}
-
-.kc-contact__footer-copy {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.3);
-}
-
-.kc-contact__footer-link {
-  color: rgba(212,168,83,0.5) !important;
-  text-decoration: none;
-}
-
-.kc-contact__footer-link:hover {
-  color: rgba(212,168,83,0.9) !important;
-}
-</style>
 
 {% schema %}
 {
@@ -358,6 +372,12 @@
   "tag": "section",
   "class": "kc-section-contact",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image",
+      "info": "Recommended: kc-contact-bg.jpg — cinematic starfield night horizon"
+    },
     {
       "type": "text",
       "id": "eyebrow",
@@ -367,26 +387,50 @@
     {
       "type": "text",
       "id": "headline",
-      "label": "Headline",
-      "default": "Ready to Start Climbing?"
+      "label": "Headline (white portion)",
+      "default": "Ready to"
+    },
+    {
+      "type": "text",
+      "id": "headline_gold",
+      "label": "Headline (gold portion)",
+      "default": "Do the Work?"
     },
     {
       "type": "textarea",
-      "id": "body",
-      "label": "Body Copy",
-      "default": "Whether you've got a question, want to work together, or just want to say g'day — I'm here. No corporate bullshit, no automated responses. Just a real conversation."
+      "id": "intro",
+      "label": "Intro Paragraph",
+      "default": "If you've got questions, need some direction on where to start, or just want to say g'day, drop a line below."
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Italic Note",
+      "default": "Note: I provide online coaching and guidance only. No automated booking systems here — just real conversations to see if we're a good fit."
     },
     {
       "type": "text",
-      "id": "email",
-      "label": "Email Address",
-      "default": "hello@thekctheory.com.au"
+      "id": "name_placeholder",
+      "label": "Name Field Placeholder",
+      "default": "Your name"
     },
     {
       "type": "text",
-      "id": "instagram",
-      "label": "Instagram Handle (without @)",
-      "default": "thekctheory"
+      "id": "email_placeholder",
+      "label": "Email Field Placeholder",
+      "default": "your@email.com"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message Field Label",
+      "default": "What's the biggest challenge you're facing right now?"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Message Field Placeholder",
+      "default": "Tell me what's going on..."
     },
     {
       "type": "text",
@@ -395,15 +439,26 @@
       "default": "Send Message"
     },
     {
-      "type": "checkbox",
-      "id": "show_disclaimer",
-      "label": "Show Disclaimer Link",
-      "default": true
+      "type": "header",
+      "content": "Footer"
     },
     {
-      "type": "url",
-      "id": "disclaimer_link",
-      "label": "Disclaimer Page Link"
+      "type": "textarea",
+      "id": "crisis_note",
+      "label": "Crisis Note (before number)",
+      "default": "If you're in crisis, please reach out to a professional or call a helpline."
+    },
+    {
+      "type": "text",
+      "id": "crisis_number",
+      "label": "Crisis Helpline Number",
+      "default": "Lifeline: 13 11 14"
+    },
+    {
+      "type": "textarea",
+      "id": "crisis_suffix",
+      "label": "Crisis Note (after number)",
+      "default": ". The KC Theory is for building a better life, not for when you're hanging on by a thread."
     }
   ],
   "presets": [
